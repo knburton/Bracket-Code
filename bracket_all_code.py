@@ -1,5 +1,3 @@
-#Kathryn smells
-
 N=Rational(7)
 
 T=str()
@@ -75,6 +73,8 @@ def monomial_bracket(m,n):
 def bracket(f,g):
         return sum([sum([f.coefficients()[j]*g.coefficients()[i]*monomial_bracket(f.monomials()[j],g.monomials()[i]) for i in range(len(g.monomials()))]) for j in range(len(f.monomials()))])
     
+
+
 U = matrix(Q,24,25)
 
 for i in range(5):
@@ -197,19 +197,23 @@ for k in range(4):
             
 mtheta = [0];
 
-for i in range(1,8):
-    mtheta.append(X.matrix_from_rows_and_columns(range(7-i,7),range(7-i,7)));
+for i in range(1,N):
+    mtheta.append(X.matrix_from_rows_and_columns(range(N-i,N),range(N-i,N)));
             
             
 mphi = [0];
 
-for i in range(1,25):
-    mphi.append(pU.matrix_from_rows_and_columns(range(24-i,24),range(32-i,32)));
+for i in range(1,floor((N+1)/2)*(N-1)+1):
+    mphi.append(pU.matrix_from_rows_and_columns(range(floor((N+1)/2)*(N-1)-i,floor((N+1)/2)*(N-1)),range(floor((N+1)/2)*(N+1)-i,floor((N+1)/2)*(N+1))));
     
 mpsi = [0];
 
-for i in range(1,19):
-    mpsi.append(pU.matrix_from_rows_and_columns(range(24-i,24),range(33-i,33)));
+if N%2 == 0:
+    M = floor((N+1)/2)*(N-1)
+else:
+    M = floor((N+1)/2)*(N-1)-N+1
+for i in range(1,M+1):
+    mpsi.append(pU.matrix_from_rows_and_columns(range(floor((N+1)/2)*(N-1)-i,floor((N+1)/2)*(N-1)),range(floor((N+1)/2)*(N+1)-i+1,floor((N+1)/2)*(N+1)+1)));
 
 xgens=matrix(Q,1,len(Q.gens()))
 
